@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>luca1iu</title>
+        <link>https://luca1iu.github.io/</link>
+        <description>Data Analyst/Engineer</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>lucaliu217@outlook.com (luca1iu)</managingEditor>
+            <webMaster>lucaliu217@outlook.com (luca1iu)</webMaster><lastBuildDate>Sat, 11 Nov 2023 21:34:44 &#43;0800</lastBuildDate>
+            <atom:link href="https://luca1iu.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>How to merge multiple excel files using python</title>
+    <link>https://luca1iu.github.io/posts/append_excel/</link>
+    <pubDate>Sat, 11 Nov 2023 21:34:44 &#43;0800</pubDate>
+    <author>luca1iu</author>
+    <guid>https://luca1iu.github.io/posts/append_excel/</guid>
+    <description><![CDATA[When you have multiple excel files with the same column and you want to merge multiple excel files into one excel file…
+Python method import packages import pandas as pd import os Put all the excel to be merged into a separate folder
+define a function
+def append(path): frames = [] for root, dirs, files in os.walk(path): for file in files: file_with_path = os.path.join(root, file) df = pd.read_excel(file_with_path, engine=&#39;openpyxl&#39;) frames.append(df) df = pd.]]></description>
+</item>
+</channel>
+</rss>
