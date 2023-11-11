@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>How to specify the data format when saving excel via python? - luca1iu</title><meta name="Description" content="Data Analyst/Engineer"><meta property="og:title" content="How to specify the data format when saving excel via python?" />
+<meta property="og:description" content="In this article we will solve the following questions:
+how to use xlsxwriter to save excel? how to save multiple dataframes to worksheets using Python? how to use Python to stylize the excel formatting? how to set specific data type such as datetime /interger/string/floating data? Question Description: please imagine that you have following 2 dataframes and you want to save them into one excel file with different sheets and stylize the excel formatting" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" /><meta property="og:image" content="https://luca1iu.github.io/images/avatar.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-11T21:34:44+08:00" />
+<meta property="article:modified_time" content="2023-10-11T21:34:44+08:00" /><meta property="og:site_name" content="luca1iu" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://luca1iu.github.io/images/avatar.png"/>
+
+<meta name="twitter:title" content="How to specify the data format when saving excel via python?"/>
+<meta name="twitter:description" content="In this article we will solve the following questions:
+how to use xlsxwriter to save excel? how to save multiple dataframes to worksheets using Python? how to use Python to stylize the excel formatting? how to set specific data type such as datetime /interger/string/floating data? Question Description: please imagine that you have following 2 dataframes and you want to save them into one excel file with different sheets and stylize the excel formatting"/>
+<meta name="application-name" content="luca1iu">
+<meta name="apple-mobile-web-app-title" content="luca1iu"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" /><link rel="prev" href="https://luca1iu.github.io/posts/how-to-check-the-port-list-for-oracle-database/" /><link rel="next" href="https://luca1iu.github.io/posts/append_excel/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to specify the data format when saving excel via python?",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/luca1iu.github.io\/posts\/how-to-specify-the-data-format-when-saving-excel-via-python\/"
+        },"genre": "posts","wordcount":  784 ,
+        "url": "https:\/\/luca1iu.github.io\/posts\/how-to-specify-the-data-format-when-saving-excel-via-python\/","datePublished": "2023-10-11T21:34:44+08:00","dateModified": "2023-10-11T21:34:44+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "luca1iu"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="luca1iu">🇩🇪 luca1iu</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="luca1iu">🇩🇪 luca1iu</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">How to specify the data format when saving excel via python?</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>luca1iu</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-11">2023-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;784 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#df1">df1:</a></li>
+        <li><a href="#df2">df2:</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-import-xlsxwriter-package-and-create-excel-file">1. import xlsxwriter package and create excel file</a></li>
+    <li><a href="#2-create-two-sheets">2. create two sheets</a></li>
+    <li><a href="#3-set-header-format-and-save-the-header">3. set header format and save the header</a></li>
+    <li><a href="#4-create-some-format">4. create some format</a></li>
+    <li><a href="#5-save-the-data-into-excel-with-cell_format">5. save the data into excel with cell_format</a></li>
+    <li><a href="#6-set-column-width">6. set column width</a></li>
+    <li><a href="#7-finish">7. finish</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>In this article we will solve the following questions:</p>
+<ol>
+<li>how to use xlsxwriter to save excel?</li>
+<li>how to save multiple dataframes to worksheets using Python?</li>
+<li>how to use Python to stylize the excel formatting?</li>
+<li>how to set specific data type such as datetime /interger/string/floating data?</li>
+</ol>
+<h1 id="question-description">Question Description:</h1>
+<p>please imagine that you have following 2 dataframes and you want to save them into one excel file with different sheets and stylize the excel formatting</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># generate two dataframes </span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2022/12/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/12/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/12/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/12/1&#39;</span><span class="p">],</span> <span class="s1">&#39;Int&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">116382</span><span class="p">,</span> <span class="mi">227393</span><span class="p">,</span> <span class="mi">3274984</span><span class="p">,</span> <span class="mi">438164</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">     <span class="s1">&#39;Int_with_seperator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1845132</span><span class="p">,</span> <span class="mi">298145</span><span class="p">,</span> <span class="mi">336278</span><span class="p">,</span> <span class="mi">443816</span><span class="p">],</span> <span class="s1">&#39;String&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;Grace&#39;</span><span class="p">,</span> <span class="s1">&#39;Luca&#39;</span><span class="p">,</span> <span class="s1">&#39;Tessa&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">     <span class="s1">&#39;Float&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">98.45</span><span class="p">,</span> <span class="mf">65.24</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">80.88</span><span class="p">],</span> <span class="s1">&#39;Percent&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8878</span><span class="p">,</span> <span class="mf">0.9523</span><span class="p">,</span> <span class="mf">0.4545</span><span class="p">,</span> <span class="mf">0.9921</span><span class="p">]})</span>
+</span></span><span class="line"><span class="cl"><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2022/11/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/11/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/11/1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022/11/1&#39;</span><span class="p">],</span> <span class="s1">&#39;Int&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">233211</span><span class="p">,</span> <span class="mi">24321</span><span class="p">,</span> <span class="mi">35345</span><span class="p">,</span> <span class="mi">23223</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;Int_with_seperator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">925478</span><span class="p">,</span> <span class="mi">23484</span><span class="p">,</span> <span class="mi">123249</span><span class="p">,</span> <span class="mi">2345675</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;String&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Apple&#39;</span><span class="p">,</span> <span class="s1">&#39;Huawei&#39;</span><span class="p">,</span> <span class="s1">&#39;Xiaomi&#39;</span><span class="p">,</span> <span class="s1">&#39;Oppo&#39;</span><span class="p">],</span> <span class="s1">&#39;Float&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">98.45</span><span class="p">,</span> <span class="mf">65.24</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">80.88</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;Percent&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.4234</span><span class="p">,</span> <span class="mf">0.9434</span><span class="p">,</span> <span class="mf">0.6512</span><span class="p">,</span> <span class="mf">0.6133</span><span class="p">]})</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="df1">df1:</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Date | Int | Int_with_seperator | String | Float | Percent |
+</span></span><span class="line"><span class="cl">|: - - - - - | - - - - :| - - - - - - - - - - -:|: - - - - -| - - - - :| - - - - - :|
+</span></span><span class="line"><span class="cl">| 2022/12/1 | 116382 | 1845132 | Tom | 98.45 | 0.8878 |
+</span></span><span class="line"><span class="cl">| 2022/12/1 | 227393 | 298145 | Grace | 65.24 | 0.9523 |
+</span></span><span class="line"><span class="cl">| 2022/12/1 | 3274984 | 336278 | Luca | 30 | 0.4545 |
+</span></span><span class="line"><span class="cl">| 2022/12/1 | 438164 | 443816 | Tessa | 80.88 | 0.9921 |
+</span></span></code></pre></div><h3 id="df2">df2:</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Date | Int | Int_with_seperator | String | Float | Percent |
+</span></span><span class="line"><span class="cl">|: - - - - - | - - - -:| - - - - - - - - - - -:|: - - - - -| - - - - :| - - - - - :|
+</span></span><span class="line"><span class="cl">| 2022/11/1 | 233211 | 925478 | Apple | 98.45 | 0.4234 |
+</span></span><span class="line"><span class="cl">| 2022/11/1 | 24321 | 23484 | Huawei | 65.24 | 0.9434 |
+</span></span><span class="line"><span class="cl">| 2022/11/1 | 35345 | 123249 | Xiaomi | 30 | 0.6512 |
+</span></span><span class="line"><span class="cl">| 2022/11/1 | 23223 | 2345675 | Oppo | 80.88 | 0.6133 |
+</span></span></code></pre></div><h1 id="solution-save-excel-through-xlsxwriter">Solution: save excel through xlsxwriter</h1>
+<h2 id="1-import-xlsxwriter-package-and-create-excel-file">1. import xlsxwriter package and create excel file</h2>
+<p>use .Workbook to create a new excel file</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># import package</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">xlsxwriter</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># create excel file</span>
+</span></span><span class="line"><span class="cl"><span class="n">workbook</span> <span class="o">=</span> <span class="n">xlsxwriter</span><span class="o">.</span><span class="n">Workbook</span><span class="p">(</span><span class="s2">&#34;new_excel.xlsx&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="2-create-two-sheets">2. create two sheets</h2>
+<p>use .add_worksheet to create sheet and cus we have two dataframes that need to be saved, so we have to create two sheets</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">worksheet1</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_worksheet</span><span class="p">(</span><span class="s1">&#39;df1_sheet&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_worksheet</span><span class="p">(</span><span class="s1">&#39;df2_sheet&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="3-set-header-format-and-save-the-header">3. set header format and save the header</h2>
+<p>at first, we set header format and use .write_row to save our header.
+.write_row has four arguments, they are: worksheet.write_row(row, col, data, cell_format)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">header_format</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;valign&#39;</span><span class="p">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;fg_color&#39;</span><span class="p">:</span> <span class="s1">&#39;#002060&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;font_color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">header_format</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">header_format</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="4-create-some-format">4. create some format</h2>
+<p>format.set_num_format()： This method is used to define the numerical format of a number in Excel. It controls whether a number is displayed as an integer, a floating point number, a date, a currency value or some other user defined format.
+The numerical format of a cell can be specified by using a format string or an index to one of Excel’s built-in formats, for more information you can check <a href="https://xlsxwriter.readthedocs.io/format.html" target="_blank" rel="noopener noreffer ">xlsxwriter-format</a>
+for example: 14 represents ‘m/dd/yyyy’, so format.set_num_format(14) = format.set_num_format(‘m/dd/yyyy’)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># set datetime format &#34;m/d/yy&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_datetime</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_datetime</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> <span class="c1"># based on above table, 14 means &#34;m/d/yy&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_datetime</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># set font size</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set General format</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_general</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_general</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 0 means general</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_general</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set integer format &#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set float format &#34;0.00&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_float</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_float</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_float</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set integer format with thousands separators &#34;#,##0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer_separator</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer_separator</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_integer_separator</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set percent format &#34;0.00%&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_percent</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">({</span><span class="s1">&#39;border&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_percent</span><span class="o">.</span><span class="n">set_num_format</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">format_percent</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="5-save-the-data-into-excel-with-cell_format">5. save the data into excel with cell_format</h2>
+<p>the zero index row already saved our header, so we start from one index row(set the first argument to 1)
+.write_column(row, column, data, cell_format)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">format_datetime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">format_integer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">format_integer_separator</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">format_general</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">format_float</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">format_percent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">format_datetime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">format_integer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">format_integer_separator</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">format_general</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">format_float</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">write_column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">format_percent</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="6-set-column-width">6. set column width</h2>
+<p>for better display the data, we can also use .set_column to set the column width.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;A:A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;B:B&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;C:C&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;D:D&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;E:E&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet1</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;F:F&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;A:A&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;B:B&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;C:C&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;D:D&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;E:E&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">worksheet2</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="s1">&#39;F:F&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="7-finish">7. finish</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">workbook</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><p>you can see the full code in <a href="https://github.com/luca1iu/save_excel_with_xlsxwriter.git" target="_blank" rel="noopener noreffer ">Github</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" data-title="How to specify the data format when saving excel via python?"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" data-title="How to specify the data format when saving excel via python?"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" data-title="How to specify the data format when saving excel via python?"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/" data-title="How to specify the data format when saving excel via python?"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/how-to-check-the-port-list-for-oracle-database/" class="prev" rel="prev" title="How to Check the Port List for Oracle Database?"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>How to Check the Port List for Oracle Database?</a>
+            <a href="/posts/append_excel/" class="next" rel="next" title="How to merge multiple excel files using python">How to merge multiple excel files using python<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">luca1iu</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

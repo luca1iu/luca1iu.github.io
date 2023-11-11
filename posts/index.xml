@@ -15,5 +15,24 @@ Python method import packages import pandas as pd import os Put all the excel to
 define a function
 def append(path): frames = [] for root, dirs, files in os.walk(path): for file in files: file_with_path = os.path.join(root, file) df = pd.read_excel(file_with_path, engine=&#39;openpyxl&#39;) frames.append(df) df = pd.]]></description>
 </item>
+<item>
+    <title>How to specify the data format when saving excel via python?</title>
+    <link>https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/</link>
+    <pubDate>Wed, 11 Oct 2023 21:34:44 &#43;0800</pubDate>
+    <author>luca1iu</author>
+    <guid>https://luca1iu.github.io/posts/how-to-specify-the-data-format-when-saving-excel-via-python/</guid>
+    <description><![CDATA[In this article we will solve the following questions:
+how to use xlsxwriter to save excel? how to save multiple dataframes to worksheets using Python? how to use Python to stylize the excel formatting? how to set specific data type such as datetime /interger/string/floating data? Question Description: please imagine that you have following 2 dataframes and you want to save them into one excel file with different sheets and stylize the excel formatting]]></description>
+</item>
+<item>
+    <title>How to Check the Port List for Oracle Database?</title>
+    <link>https://luca1iu.github.io/posts/how-to-check-the-port-list-for-oracle-database/</link>
+    <pubDate>Mon, 11 Sep 2023 21:34:44 &#43;0800</pubDate>
+    <author>luca1iu</author>
+    <guid>https://luca1iu.github.io/posts/how-to-check-the-port-list-for-oracle-database/</guid>
+    <description><![CDATA[Introduction When you want to access a database using Jupyter Notebook or other web-based Python compilers like Datalore, DeepNote, or Google Colab, you may face issues even if you can access the same database using an IDE locally. One possible reason for this issue is that the database you are using does not allow web access.
+So, how can you check whether your database allows web access?
+Checking the Port List for Oracle Database To check the port list for Oracle Database, follow these steps:]]></description>
+</item>
 </channel>
 </rss>
